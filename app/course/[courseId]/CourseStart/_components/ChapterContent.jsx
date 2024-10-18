@@ -12,6 +12,11 @@ const opts = {
 };
 
 function ChapterContent({ chapter, content }) {
+  // Determine if content is an array or has a chapters property
+  const chapters = Array.isArray(content?.content) 
+    ? content.content 
+    : content?.content?.chapters;
+
   return (
     <div className='p-10'>
       {/* Display Chapter Name */}
@@ -25,14 +30,14 @@ function ChapterContent({ chapter, content }) {
 
       {/* Map through chapters content */}
       <div>
-        {content?.content?.chapters?.map((item, index) => (
+        {chapters?.map((item, index) => (
           <div key={index} className='p-5 bg-slate-50 mb-3 rounded-lg'>
             <h2 className='font-medium text-lg'>{item?.title}</h2>
             <ReactMarkdown>{item?.explanation}</ReactMarkdown>
-            {item?.codeExample && (
+            {item?.code && (
               <div className='p-4 bg-black text-white rounded-md mt-3'>
                 <pre>
-                  <code>{item?.codeExample}</code>
+                  <code>{item?.code}</code>
                 </pre>
               </div>
             )}
@@ -42,5 +47,6 @@ function ChapterContent({ chapter, content }) {
     </div>
   );
 }
+
 
 export default ChapterContent;
