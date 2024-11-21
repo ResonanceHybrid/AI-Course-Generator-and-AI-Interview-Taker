@@ -33,7 +33,7 @@ function CourseLayout({params}) {
     setLoading(true)
     const chapters=course?.courseOutput?.chapters;
     chapters.forEach(async(chapters,index)=>{
-      const PROMPT="Generate a detailed explanation in JSON format for the following: Topic: [Insert course name dynamically], Chapters: [Insert chapter names dynamically]. The JSON should include the following fields: 1. courseName - The name of the course. 2. description - A brief overview of the course. 3. chapters - An array containing details of each chapter, where each chapter includes: chapterName - The chapter title, about - A detailed explanation of the chapter content, duration - The time estimated for that chapter. Additionally, if applicable, include a codeExample field in <precode> format for any relevant code snippets.";      
+      const PROMPT="Generate a detailed explanation in JSON format for the following: Topic: "+course?.courseName+", Chapters: "+chapters?.chapter_name+". The JSON should include the following fields: 1. courseName - The name of the course. 2. description - A brief overview of the course. 3. chapters - An array containing details of each chapter, where each chapter includes: chapterName - The chapter title, about - A detailed explanation of the chapter content, duration - The time estimated for that chapter. Additionally, if applicable, include a codeExample field in <precode> format for any relevant code snippets.";      
       console.log(PROMPT);
       // if(index<3){
         try{
