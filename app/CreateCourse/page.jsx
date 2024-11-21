@@ -61,9 +61,16 @@ function CreateCourse() {
 
     const GenerateCourseLayout = async () => {
         setLoading(true);
-        const BASIC_PROMPT = "Generate a course tutorial on following details with field as course name, description, along with chapter name, about, duration:";
-        const USER_INPUT_PROMPT = 'Category: ' + userCourseInput?.category + ',Topic: ' + userCourseInput?.topic + ',level: ' + userCourseInput?.level + ',duration: ' + userCourseInput?.duration + ',No of chapters: ' + userCourseInput?.NoOfChapters + ' in JSON format';
-        const FINAL_PROMPT = BASIC_PROMPT + USER_INPUT_PROMPT;
+        const BASIC_PROMPT = "Generate a course tutorial in JSON format with the following structure: { \"courseName\": \"\", \"description\": \"\", \"chapters\": [{ \"chapterName\": \"\", \"about\": \"\", \"duration\": \"\" }] }. Ensure the output strictly adheres to this format.";
+
+const USER_INPUT_PROMPT = 'Category: ' + userCourseInput?.category + 
+                          ', Topic: ' + userCourseInput?.topic + 
+                          ', Level: ' + userCourseInput?.level + 
+                          ', Duration: ' + userCourseInput?.duration + 
+                          ', No. of Chapters: ' + userCourseInput?.NoOfChapters;
+
+const FINAL_PROMPT = BASIC_PROMPT + " " + USER_INPUT_PROMPT;
+
 
         console.log(FINAL_PROMPT);
         const result = await CourseGeneratorModel.sendMessage(FINAL_PROMPT);
